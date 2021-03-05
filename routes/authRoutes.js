@@ -8,9 +8,9 @@ const { login_get,
         signup_post
       } = require('../controllers/authController')
 
-router.get('/sign_up', signup_get)
+router.get('/signup', signup_get)
 
-router.post('/sign_up', signup_post)
+router.post('/signup', signup_post)
 
 router.get('/login', login_get)
 

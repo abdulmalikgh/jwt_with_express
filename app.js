@@ -3,15 +3,18 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+
 // middleware
+app.use(express.json())
 app.use(express.static('public'));
+
+const authRoute = require('./routes/authRoutes')
+
 
 // view engine
 app.set('view engine', 'ejs');
 
-const authRoute = require('./routes/authRoutes')
 
-app.use(authRoute)
 
 // database connection
 const dbURI = 'mongodb://localhost/jwt';
@@ -27,3 +30,4 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 // routes
 app.get('/', (req, res) => res.render('home'));
 app.get('/smoothies', (req, res) => res.render('smoothies'));
+app.use(authRoute)
