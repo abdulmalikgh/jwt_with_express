@@ -20,9 +20,9 @@ const handleError = (err) => {
 
         } ) 
 
-    }
+        return errors
 
-    return errors
+    }  
 
 }
 
@@ -56,6 +56,7 @@ module.exports.login_post = async(req, res) => {
         
     } catch (err) {
 
+        console.log('errors', err)
         const errors = handleError(err)
 
         res.status(400)

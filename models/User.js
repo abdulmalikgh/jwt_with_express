@@ -1,6 +1,8 @@
- const { isEmail  }= require('validator')
+const { isEmail  } = require('validator')
 
 const mongoose = require('mongoose')
+
+const bcrypt = require('bcrypt')
 
 const userSchema = mongoose.Schema({
 
@@ -26,6 +28,16 @@ const userSchema = mongoose.Schema({
 
         minlength: [6, 'Password should be 6 characters or more']
     }
+})
+
+userSchema.pre('save', async function(next) {
+
+    const salt = await bcrypt.genSalt()
+
+    this.password = await bcrypt.hash(this.password, salt)
+
+    next()
+
 })
 
 const User = mongoose.model('user', userSchema)
